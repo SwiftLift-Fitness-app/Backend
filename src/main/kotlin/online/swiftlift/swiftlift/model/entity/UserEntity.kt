@@ -1,8 +1,6 @@
 package online.swiftlift.swiftlift.model.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import online.swiftlift.swiftlift.model.enum.GenderType
 
 @Entity
@@ -15,7 +13,7 @@ class UserEntity(
     @Column(name = "last_name") val lastName: String,
     @Column(name = "age") val age: Int,
     @Column(name = "weight") val weight: Double,
-    @Column(name = "gender") val gender: GenderType,
+    @Column(name = "gender") @Enumerated(EnumType.STRING) val gender: GenderType,
 ) : BaseEntity() {
     constructor() : this("", "", "", "", "", -1, -1.0, GenderType.MALE)
 }

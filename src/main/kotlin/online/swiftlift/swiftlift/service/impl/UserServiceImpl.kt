@@ -1,30 +1,34 @@
 package online.swiftlift.swiftlift.service.impl
 
+import online.swiftlift.swiftlift.exception.RoleNotFoundException
 import online.swiftlift.swiftlift.exception.UserNotFoundException
 import online.swiftlift.swiftlift.model.dto.user.UserDTO
 import online.swiftlift.swiftlift.model.dto.user.UserLoginBindingModel
 import online.swiftlift.swiftlift.model.dto.user.UserRegisterBindingModel
 import online.swiftlift.swiftlift.model.entity.UserEntity
 import online.swiftlift.swiftlift.model.enum.GenderType
+import online.swiftlift.swiftlift.model.enum.Role
+import online.swiftlift.swiftlift.repository.RoleRepository
 import online.swiftlift.swiftlift.repository.UserRepository
 import online.swiftlift.swiftlift.service.UserService
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserServiceImpl(val userRepository: UserRepository) : UserService {
+class UserServiceImpl(val userRepository: UserRepository, private val roleRepository: RoleRepository) : UserService {
 
     override fun register(userRegisterBindingModel: UserRegisterBindingModel): UserDTO {
 
+        val role = roleRepository.findByName(Role.USER).orElseThrow { RoleNotFoundException(Role.USER) }
+
+        println("I got here")
+
         userRepository.save(UserEntity(
-            userRegisterBindingModel.username,
-            userRegisterBindingModel.password,
-            userRegisterBindingModel.email,
-            userRegisterBindingModel.firstName,
-            userRegisterBindingModel.lastName,
-            userRegisterBindingModel.age,
-            userRegisterBindingModel.weight,
-            GenderType.valueOf(userRegisterBindingModel.gender.uppercase())))
+            username = userRegisterBindingModel.username,
+            password = userRegisterBindingModel.password,
+            email = userRegisterBindingModel.email,
+            roles = mutableSetOf(role)
+        ))
 
         return entityToDTO(userRepository
             .findByUsername(userRegisterBindingModel.username)

@@ -6,7 +6,5 @@ import java.util.*
 
 @MappedSuperclass
 open class BaseEntity(
-    @Id val id: UUID
-) {
-    constructor() : this(UUID.randomUUID())
-}
+    @Id val id: UUID = UUID.randomUUID()
+)

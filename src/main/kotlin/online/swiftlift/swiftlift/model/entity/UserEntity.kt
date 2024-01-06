@@ -14,5 +14,5 @@ class UserEntity(
     @Column(name = "age") val age: Int = 0,
     @Column(name = "weight") val weight: Double = 0.0,
     @Column(name = "gender") @Enumerated(EnumType.STRING) val gender: GenderType = GenderType.MALE,
-    @ManyToMany val roles: Set<RoleEntity> = mutableSetOf(),
+    @ManyToMany(fetch = FetchType.EAGER) val roles: Set<RoleEntity> = mutableSetOf(),
 ) : BaseEntity()

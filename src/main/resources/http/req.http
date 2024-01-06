@@ -5,10 +5,5 @@ Content-Type: application/json
   "username": "someuser",
   "password": "1234",
   "confirmPassword": "1234",
-  "email": "user@email.net",
-  "firstName": "Some",
-  "lastName": "User",
-  "age": 24,
-  "weight": 45.0,
-  "gender": "MALE"
+  "email": "user@email.net"
 }

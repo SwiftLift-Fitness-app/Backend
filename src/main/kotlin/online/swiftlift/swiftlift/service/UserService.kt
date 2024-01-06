@@ -9,5 +9,6 @@ interface UserService {
     fun register(userRegisterBindingModel: UserRegisterBindingModel): UserDTO
 
     fun login(userLoginBindingModel: UserLoginBindingModel): UserDTO
+
     fun getAll(): List<UserDTO>
 }

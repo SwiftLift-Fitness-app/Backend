@@ -9,14 +9,18 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.stereotype.Service
 
+@Service
 class SwiftLiftUserDetailsServiceImpl(private val userRepository: UserRepository)
     : SwiftLiftUserDetailsService {
-    override fun loadUserByUsername(username: String?): UserDetails =
-        userRepository
-            .findByUsername(username ?: "")
+    override fun loadUserByUsername(username: String): UserDetails {
+        print("$username, great!")
+        return userRepository
+            .findByUsername(username)
             .map { user -> map(user) }
-            .orElseThrow { UserNotFoundException(username ?: "") }
+            .orElseThrow { UserNotFoundException(username) }
+    }
 
     private fun map(user: UserEntity): UserDetails =
         User

@@ -11,21 +11,20 @@ import online.swiftlift.swiftlift.model.enum.Role
 import online.swiftlift.swiftlift.repository.RoleRepository
 import online.swiftlift.swiftlift.repository.UserRepository
 import online.swiftlift.swiftlift.service.UserService
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserServiceImpl(val userRepository: UserRepository, private val roleRepository: RoleRepository) : UserService {
+class UserServiceImpl(val userRepository: UserRepository, private val roleRepository: RoleRepository, private val encoder: PasswordEncoder) : UserService {
 
     override fun register(userRegisterBindingModel: UserRegisterBindingModel): UserDTO {
 
         val role = roleRepository.findByName(Role.USER).orElseThrow { RoleNotFoundException(Role.USER) }
 
-        println("I got here")
-
         userRepository.save(UserEntity(
             username = userRegisterBindingModel.username,
-            password = userRegisterBindingModel.password,
+            password = encoder.encode(userRegisterBindingModel.password),
             email = userRegisterBindingModel.email,
             roles = mutableSetOf(role)
         ))

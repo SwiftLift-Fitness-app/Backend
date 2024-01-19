@@ -1,6 +1,7 @@
-package online.swiftlift.swiftlift.model.entity
+package online.swiftlift.swiftlift.model.entity.diet
 
 import jakarta.persistence.*
+import online.swiftlift.swiftlift.model.entity.BaseEntity
 
 @Entity
 @Table(name = "meals")

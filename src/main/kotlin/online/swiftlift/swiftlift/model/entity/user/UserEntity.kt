@@ -1,6 +1,7 @@
-package online.swiftlift.swiftlift.model.entity
+package online.swiftlift.swiftlift.model.entity.user
 
 import jakarta.persistence.*
+import online.swiftlift.swiftlift.model.entity.BaseEntity
 import online.swiftlift.swiftlift.model.enum.GenderType
 
 @Entity
@@ -11,8 +12,9 @@ class UserEntity(
     @Column(name = "email") val email: String = "",
     @Column(name = "first_name") val firstName: String = "",
     @Column(name = "last_name") val lastName: String = "",
-    @Column(name = "age") val age: Int = 0,
-    @Column(name = "weight") val weight: Double = 0.0,
-    @Column(name = "gender") @Enumerated(EnumType.STRING) val gender: GenderType = GenderType.MALE,
+    @Column(name = "age") var age: Int = 0,
+    @Column(name = "weight") var weight: Double = 0.0,
+    @Column(name = "height") var height: Int = 0,
+    @Column(name = "gender") @Enumerated(EnumType.STRING) var gender: GenderType = GenderType.MALE,
     @ManyToMany(fetch = FetchType.EAGER) val roles: Set<RoleEntity> = mutableSetOf(),
 ) : BaseEntity()

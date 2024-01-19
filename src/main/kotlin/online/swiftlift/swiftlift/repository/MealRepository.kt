@@ -1,7 +1,7 @@
 package online.swiftlift.swiftlift.repository
 
 import online.swiftlift.swiftlift.model.dto.MealDTO
-import online.swiftlift.swiftlift.model.entity.MealEntity
+import online.swiftlift.swiftlift.model.entity.diet.MealEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.Optional

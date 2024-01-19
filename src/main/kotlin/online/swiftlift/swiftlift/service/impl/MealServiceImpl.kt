@@ -3,7 +3,7 @@ package online.swiftlift.swiftlift.service.impl
 import online.swiftlift.swiftlift.exception.MealNotFoundException
 import online.swiftlift.swiftlift.model.dto.IngredientDTO
 import online.swiftlift.swiftlift.model.dto.MealDTO
-import online.swiftlift.swiftlift.model.entity.MealEntity
+import online.swiftlift.swiftlift.model.entity.diet.MealEntity
 import online.swiftlift.swiftlift.model.enum.DietaryRestriction
 import online.swiftlift.swiftlift.repository.MealRepository
 import online.swiftlift.swiftlift.service.MealService

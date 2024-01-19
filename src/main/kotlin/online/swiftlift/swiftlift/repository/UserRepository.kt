@@ -1,6 +1,6 @@
 package online.swiftlift.swiftlift.repository
 
-import online.swiftlift.swiftlift.model.entity.UserEntity
+import online.swiftlift.swiftlift.model.entity.user.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.Optional

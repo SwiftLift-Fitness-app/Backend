@@ -1,8 +1,9 @@
-package online.swiftlift.swiftlift.model.entity
+package online.swiftlift.swiftlift.model.entity.workout
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import online.swiftlift.swiftlift.model.entity.BaseEntity
 import java.time.LocalDateTime
 
 @Entity

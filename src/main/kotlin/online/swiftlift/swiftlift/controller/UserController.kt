@@ -1,8 +1,8 @@
 package online.swiftlift.swiftlift.controller
 
 import online.swiftlift.swiftlift.model.dto.user.UserDTO
-import online.swiftlift.swiftlift.model.dto.user.UserLoginBindingModel
 import online.swiftlift.swiftlift.model.dto.user.UserRegisterBindingModel
+import online.swiftlift.swiftlift.model.dto.user.UserSurveyBindingModel
 import online.swiftlift.swiftlift.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
@@ -29,4 +29,12 @@ class UserController(val userService: UserService) {
     @PostMapping("/register")
     fun register(@RequestBody userRegisterBindingModel: UserRegisterBindingModel): ResponseEntity<UserDTO> =
         ResponseEntity.ok(userService.register(userRegisterBindingModel))
+
+    @PatchMapping("/register")
+    fun register(@RequestBody userSurveyBindingModel: UserSurveyBindingModel): ResponseEntity<UserDTO> =
+        ResponseEntity.ok(userService.submitSurvey(userSurveyBindingModel))
+
+    @GetMapping("/profile/{username}")
+    fun profileData(@PathVariable username: String) =
+        userService.profileData(username)
 }

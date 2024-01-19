@@ -5,9 +5,4 @@ data class UserRegisterBindingModel(
     val password: String,
     val confirmPassword: String,
     val email: String,
-//    val firstName: String,
-//    val lastName: String,
-//    val age: Int,
-//    val weight: Double,
-//    val gender: String,
     )

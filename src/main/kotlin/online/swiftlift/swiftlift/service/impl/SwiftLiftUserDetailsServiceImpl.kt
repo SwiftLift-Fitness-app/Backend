@@ -1,8 +1,8 @@
 package online.swiftlift.swiftlift.service.impl
 
 import online.swiftlift.swiftlift.exception.UserNotFoundException
-import online.swiftlift.swiftlift.model.entity.RoleEntity
-import online.swiftlift.swiftlift.model.entity.UserEntity
+import online.swiftlift.swiftlift.model.entity.user.RoleEntity
+import online.swiftlift.swiftlift.model.entity.user.UserEntity
 import online.swiftlift.swiftlift.repository.UserRepository
 import online.swiftlift.swiftlift.service.SwiftLiftUserDetailsService
 import org.springframework.security.core.GrantedAuthority

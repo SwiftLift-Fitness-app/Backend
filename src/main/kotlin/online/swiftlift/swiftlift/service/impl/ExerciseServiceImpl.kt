@@ -3,7 +3,7 @@ package online.swiftlift.swiftlift.service.impl
 import online.swiftlift.swiftlift.exception.ExerciseNotFoundException
 import online.swiftlift.swiftlift.model.dto.exercise.ExerciseAddBindingModel
 import online.swiftlift.swiftlift.model.dto.exercise.ExerciseDTO
-import online.swiftlift.swiftlift.model.entity.ExerciseEntity
+import online.swiftlift.swiftlift.model.entity.workout.ExerciseEntity
 import online.swiftlift.swiftlift.repository.ExerciseRepository
 import online.swiftlift.swiftlift.service.ExerciseService
 import org.springframework.stereotype.Service

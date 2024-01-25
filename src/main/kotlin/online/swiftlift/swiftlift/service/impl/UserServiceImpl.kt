@@ -32,9 +32,10 @@ class UserServiceImpl(val userRepository: UserRepository,
         )
         )
 
-        return entityToDTO(userRepository
+        return userRepository
             .findByUsername(userRegisterBindingModel.username)
-            .orElseThrow { UserNotFoundException(userRegisterBindingModel.username) } )
+            .orElseThrow { UserNotFoundException(userRegisterBindingModel.username) }
+            .toDTO()
     }
 
     override fun submitSurvey(userSurveyBindingModel: UserSurveyBindingModel): UserDTO {
@@ -51,7 +52,7 @@ class UserServiceImpl(val userRepository: UserRepository,
         }
 
         userRepository.save(user)
-        return entityToDTO(user)
+        return user.toDTO()
     }
 
     override fun profileData(username: String): UserProfileDTO {
@@ -66,25 +67,25 @@ class UserServiceImpl(val userRepository: UserRepository,
         )
     }
 
-    override fun login(userLoginBindingModel: UserLoginBindingModel): UserDTO {
-        return entityToDTO(userRepository
+    override fun login(userLoginBindingModel: UserLoginBindingModel) =
+        userRepository
             .findByUsername(userLoginBindingModel.username)
-            .orElseThrow { UserNotFoundException(userLoginBindingModel.username) } )
-    }
+            .orElseThrow { UserNotFoundException(userLoginBindingModel.username) }
+            .toDTO()
 
     override fun getAll(): List<UserDTO> =
-        userRepository.findAll().map { x -> entityToDTO(x) }
+        userRepository.findAll().map { it.toDTO() }
 
-    private fun entityToDTO(userEntity: UserEntity) =
+    private fun UserEntity.toDTO() =
         UserDTO(
-            userEntity.username,
-            userEntity.email,
-            userEntity.firstName,
-            userEntity.lastName,
-            userEntity.age,
-            userEntity.weight,
-            userEntity.height,
-            userEntity.gender.toString()
+            username,
+            email,
+            firstName,
+            lastName,
+            age,
+            weight,
+            height,
+            gender.toString()
         )
 
     private fun loggedUser() = authenticationFacade.authentication()

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-In Test</title>
+    <!-- Include the Google Sign-In library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+
+<!-- The sign-in button -->
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<script>
+    function onSignIn(googleUser) {
+        // Get the Google User ID token
+        const idToken = googleUser.getAuthResponse().id_token;
+
+        // Send the ID token to your backend for verification
+        sendIdTokenToBackend(idToken);
+    }
+
+    function sendIdTokenToBackend(idToken) {
+        // Make an AJAX request to your backend to send the ID token
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://your-backend-endpoint-for-google-signin');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            // Handle the response from the backend
+            if (xhr.status === 200) {
+                console.log('Successfully authenticated with Google');
+            } else {
+                console.error('Failed to authenticate with Google');
+            }
+        };
+        xhr.send('idToken=' + encodeURIComponent(idToken));
+    }
+</script>
+
+</body>
+</html>

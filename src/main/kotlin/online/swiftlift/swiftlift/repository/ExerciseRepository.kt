@@ -10,5 +10,5 @@ import java.util.UUID
 @Repository
 interface ExerciseRepository : JpaRepository<ExerciseEntity, UUID> {
 
-    fun findByName(name: String): Optional<ExerciseDTO>
+    fun findByName(name: String): Optional<ExerciseEntity>
 }

@@ -19,10 +19,16 @@ class ExerciseServiceImpl(private val exerciseRepository: ExerciseRepository) : 
             )
         )
 
-        return ExerciseDTO(entity.name, entity.description, entity.created)
+        return entity.toDTO()
     }
+
+    override fun getAll(): Set<ExerciseDTO> =
+        exerciseRepository.findAll().map { it.toDTO() }.toSet()
 
     override fun findByName(name: String): ExerciseDTO =
         exerciseRepository.findByName(name)
             .orElseThrow { ExerciseNotFoundException(name) }
+            .toDTO()
+
+    private fun ExerciseEntity.toDTO() = ExerciseDTO(name, description, created)
 }

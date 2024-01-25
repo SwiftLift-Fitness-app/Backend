@@ -8,4 +8,6 @@ interface ExerciseService {
     fun addExercise(exercise: ExerciseAddBindingModel): ExerciseDTO
 
     fun findByName(name: String): ExerciseDTO
+
+    fun getAll(): Set<ExerciseDTO>
 }

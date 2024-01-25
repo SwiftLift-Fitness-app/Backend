@@ -1,6 +1,6 @@
 package online.swiftlift.swiftlift.service
 
-import online.swiftlift.swiftlift.model.dto.MealTypeDTO
+import online.swiftlift.swiftlift.model.dto.meal.MealTypeDTO
 import online.swiftlift.swiftlift.model.enum.MealType
 
 interface MealTypeService {

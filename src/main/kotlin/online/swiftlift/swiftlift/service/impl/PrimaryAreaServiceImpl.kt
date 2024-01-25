@@ -11,27 +11,25 @@ import org.springframework.stereotype.Service
 @Service
 class PrimaryAreaServiceImpl(private val primaryAreaRepository: PrimaryAreaRepository) : PrimaryAreaService {
     override fun addPrimaryArea(primaryArea: PrimaryArea): PrimaryAreaDTO =
-        mapToDTO(
             primaryAreaRepository
                 .save(PrimaryAreaEntity(primaryArea))
-        )
+                .toDTO()
 
     override fun getPrimaryArea(primaryArea: PrimaryArea): PrimaryAreaDTO =
-        mapToDTO(
             primaryAreaRepository
                 .findByName(primaryArea)
                 .orElseThrow { PrimaryAreaNotFoundException(primaryArea.name) }
-        )
+                .toDTO()
 
     override fun getAllPrimaryAreas(): Set<PrimaryAreaDTO> =
         primaryAreaRepository
             .findAll()
-            .map { mapToDTO(it) }
+            .map { it.toDTO() }
             .toSet()
 
     override fun isEmpty(): Boolean =
         primaryAreaRepository.count() == 0L
 
-    private fun mapToDTO(primaryAreaEntity: PrimaryAreaEntity) =
-        PrimaryAreaDTO(primaryAreaEntity.name.name)
+    private fun PrimaryAreaEntity.toDTO() =
+        PrimaryAreaDTO(name.name)
 }

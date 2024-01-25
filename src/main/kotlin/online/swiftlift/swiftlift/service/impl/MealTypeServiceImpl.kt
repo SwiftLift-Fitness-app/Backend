@@ -1,7 +1,7 @@
 package online.swiftlift.swiftlift.service.impl
 
 import online.swiftlift.swiftlift.exception.MealTypeNotFoundException
-import online.swiftlift.swiftlift.model.dto.MealTypeDTO
+import online.swiftlift.swiftlift.model.dto.meal.MealTypeDTO
 import online.swiftlift.swiftlift.model.entity.diet.MealTypeEntity
 import online.swiftlift.swiftlift.model.enum.MealType
 import online.swiftlift.swiftlift.repository.MealTypeRepository
@@ -11,9 +11,8 @@ import org.springframework.stereotype.Service
 @Service
 class MealTypeServiceImpl(private val mealTypeRepository: MealTypeRepository) : MealTypeService {
     override fun addMealType(mealType: MealType) =
-        mapToDTO(
             mealTypeRepository
-            .save(MealTypeEntity(mealType)))
+            .save(MealTypeEntity(mealType)).toDTO()
 
     override fun getMealType(mealType: MealType): MealTypeDTO =
             mealTypeRepository
@@ -23,11 +22,11 @@ class MealTypeServiceImpl(private val mealTypeRepository: MealTypeRepository) : 
     override fun getAll(): Set<MealTypeDTO> =
         mealTypeRepository
             .findAll()
-            .map { mapToDTO(it) }
+            .map { it.toDTO() }
             .toSet()
     override fun isEmpty(): Boolean =
         mealTypeRepository.count() == 0L
 
-    private fun mapToDTO(mealTypeEntity: MealTypeEntity) =
-        MealTypeDTO(mealTypeEntity.name.toString())
+    private fun MealTypeEntity.toDTO() =
+        MealTypeDTO(name.toString())
 }

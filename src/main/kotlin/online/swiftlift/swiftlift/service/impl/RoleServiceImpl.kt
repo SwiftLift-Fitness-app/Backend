@@ -16,11 +16,11 @@ class RoleServiceImpl(private val roleRepository: RoleRepository) : RoleService 
 
     override fun findRole(role: Role): RoleDTO =
         roleRepository.findByName(role)
-            .map { entity -> mapToDTO(entity) }
+            .map { it.toDTO() }
             .orElseThrow { RoleNotFoundException(role) }
 
-    private fun mapToDTO(entity: RoleEntity) =
-        RoleDTO(entity.name)
+    private fun RoleEntity.toDTO() =
+        RoleDTO(name)
 
     override fun isEmpty() =
         roleRepository.count() == 0L

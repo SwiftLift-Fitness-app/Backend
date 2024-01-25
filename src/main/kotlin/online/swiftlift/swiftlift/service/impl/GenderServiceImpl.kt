@@ -17,11 +17,11 @@ class GenderServiceImpl(private val genderRepository: GenderRepository) : Gender
 
     override fun findGender(gender: GenderType): GenderDTO =
         genderRepository.findByType(gender)
-            .map { entity -> mapToDTO(entity) }
+            .map { it.toDTO() }
             .orElseThrow { GenderNotFoundException(gender) }
 
-    private fun mapToDTO(gender: GenderEntity): GenderDTO =
-        GenderDTO(gender.type)
+    private fun GenderEntity.toDTO() =
+        GenderDTO(type)
 
     override fun isEmpty(): Boolean =
         genderRepository.count() == 0L

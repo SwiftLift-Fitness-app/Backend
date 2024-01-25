@@ -1,0 +1,7 @@
+POST http://localhost:8080/exercises/add
+Content-Type: application/json
+
+{
+  "name": "An exercise",
+  "description": "A description"
+}

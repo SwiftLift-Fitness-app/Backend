@@ -29,6 +29,8 @@ class SecurityConfiguration(
             .requestMatchers("/").permitAll()
             .requestMatchers("/users/login", "/users/register", "/users/login-error").permitAll()
             .requestMatchers("/exercises/add", "/exercises/all", "/exercises/**").permitAll()
+            .requestMatchers("/meals/add", "/meals/all", "/meals/**").permitAll()
+            .requestMatchers("/diets/add", "/diets/all", "/diets/**").permitAll()
             .requestMatchers("/users/all").permitAll()
             .anyRequest().authenticated()
         }.formLogin {
@@ -48,11 +50,6 @@ class SecurityConfiguration(
             .key(rememberMeKey)
             .rememberMeParameter("remember-me")
             .rememberMeCookieName("remember-me")
-//        }.oauth2Login {
-//            it
-//                .loginPage("/users/oauth2/login")
-//                .defaultSuccessUrl("/")
-//                .permitAll()
         }.build()
 
     @Bean

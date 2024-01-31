@@ -11,4 +11,5 @@ interface MealService {
 
     fun findByName(name: String): MealDTO
     fun addMeal(mealAddBindingModel: MealAddBindingModel): MealDTO
+    fun changeMeal(mealAddBindingModel: MealAddBindingModel): Any
 }

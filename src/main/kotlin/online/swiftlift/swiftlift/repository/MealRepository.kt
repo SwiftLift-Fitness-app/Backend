@@ -10,5 +10,5 @@ import java.util.UUID
 @Repository
 interface MealRepository : JpaRepository<MealEntity, UUID> {
 
-    fun findByName(name: String): Optional<MealDTO>
+    fun findByName(name: String): MealEntity?
 }

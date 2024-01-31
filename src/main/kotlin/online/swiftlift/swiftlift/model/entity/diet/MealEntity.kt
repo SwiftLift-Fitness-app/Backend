@@ -7,7 +7,7 @@ import online.swiftlift.swiftlift.model.entity.BaseEntity
 @Table(name = "meals")
 class MealEntity(
     @Column(name = "name") val name: String = "",
-    @Column(name = "description") val description: String = "",
+    @Column(name = "description") var description: String = "",
     @ElementCollection
     @JoinTable(
         name = "meals_ingredients",
@@ -15,5 +15,5 @@ class MealEntity(
     )
     @MapKeyJoinColumn(name = "ingredient_id")
     @Column(name = "amount")
-        val ingredients: Map<IngredientEntity, Double> = mutableMapOf()
+    var ingredients: Map<IngredientEntity, Double> = mutableMapOf()
 ) : BaseEntity()

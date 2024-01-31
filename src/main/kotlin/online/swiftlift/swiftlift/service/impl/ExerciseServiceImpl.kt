@@ -3,6 +3,7 @@ package online.swiftlift.swiftlift.service.impl
 import online.swiftlift.swiftlift.exception.ExerciseNotFoundException
 import online.swiftlift.swiftlift.model.dto.exercise.ExerciseAddBindingModel
 import online.swiftlift.swiftlift.model.dto.exercise.ExerciseDTO
+import online.swiftlift.swiftlift.model.dto.exercise.PrimaryAreaDTO
 import online.swiftlift.swiftlift.model.entity.workout.ExerciseEntity
 import online.swiftlift.swiftlift.repository.ExerciseRepository
 import online.swiftlift.swiftlift.service.ExerciseService
@@ -30,5 +31,5 @@ class ExerciseServiceImpl(private val exerciseRepository: ExerciseRepository) : 
             .orElseThrow { ExerciseNotFoundException(name) }
             .toDTO()
 
-    private fun ExerciseEntity.toDTO() = ExerciseDTO(name, description, created)
+    private fun ExerciseEntity.toDTO() = ExerciseDTO(name, description, PrimaryAreaDTO(area.name), created)
 }

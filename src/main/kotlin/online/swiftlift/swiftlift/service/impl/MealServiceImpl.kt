@@ -44,7 +44,23 @@ class MealServiceImpl(
 
     override fun findByName(name: String) : MealDTO =
         mealRepository.findByName(name)
-            .orElseThrow { MealNotFoundException(name) }
+            ?.toDTO()
+            ?: throw MealNotFoundException(name)
+
+    override fun changeMeal(mealAddBindingModel: MealAddBindingModel): Any {
+        mealRepository.findByName(mealAddBindingModel.name)
+            ?.let {
+                it.description = mealAddBindingModel.description
+                it.ingredients = mealAddBindingModel.ingredients
+                    .mapKeys { x->
+                        ingredientRepository
+                            .findByName(x.key.name)
+                            .orElseThrow { IngredientNotFoundException(x.key.name) }
+                    }
+                return mealRepository.save(it).toDTO()
+            }
+            ?: throw MealNotFoundException(mealAddBindingModel.name)
+    }
 
     private fun MealEntity.toDTO() =
         MealDTO(name, description,

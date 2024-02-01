@@ -1,7 +1,7 @@
 package online.swiftlift.swiftlift.service.impl
 
 import online.swiftlift.swiftlift.exception.RoleNotFoundException
-import online.swiftlift.swiftlift.model.dto.role.RoleDTO
+import online.swiftlift.swiftlift.model.dto.user.RoleDTO
 import online.swiftlift.swiftlift.model.entity.user.RoleEntity
 import online.swiftlift.swiftlift.model.enum.Role
 import online.swiftlift.swiftlift.repository.RoleRepository

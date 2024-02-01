@@ -1,4 +1,4 @@
-package online.swiftlift.swiftlift.model.dto.role
+package online.swiftlift.swiftlift.model.dto.user
 
 import online.swiftlift.swiftlift.model.enum.Role
 

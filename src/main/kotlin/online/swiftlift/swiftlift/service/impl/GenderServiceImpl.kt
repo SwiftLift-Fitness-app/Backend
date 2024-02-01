@@ -1,7 +1,7 @@
 package online.swiftlift.swiftlift.service.impl
 
 import online.swiftlift.swiftlift.exception.GenderNotFoundException
-import online.swiftlift.swiftlift.model.dto.gender.GenderDTO
+import online.swiftlift.swiftlift.model.dto.user.GenderDTO
 import online.swiftlift.swiftlift.model.entity.user.GenderEntity
 import online.swiftlift.swiftlift.model.enum.GenderType
 import online.swiftlift.swiftlift.repository.GenderRepository

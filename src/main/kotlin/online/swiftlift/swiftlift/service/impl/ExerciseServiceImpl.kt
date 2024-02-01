@@ -28,8 +28,8 @@ class ExerciseServiceImpl(private val exerciseRepository: ExerciseRepository) : 
 
     override fun findByName(name: String): ExerciseDTO =
         exerciseRepository.findByName(name)
-            .orElseThrow { ExerciseNotFoundException(name) }
-            .toDTO()
+            ?.toDTO()
+            ?: throw ExerciseNotFoundException(name)
 
-    private fun ExerciseEntity.toDTO() = ExerciseDTO(name, description, PrimaryAreaDTO(area.name), created)
+    private fun ExerciseEntity.toDTO() = ExerciseDTO(name, description, PrimaryAreaDTO(area.name), equipment.name)
 }

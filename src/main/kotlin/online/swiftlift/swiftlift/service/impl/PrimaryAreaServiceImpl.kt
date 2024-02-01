@@ -21,6 +21,9 @@ class PrimaryAreaServiceImpl(private val primaryAreaRepository: PrimaryAreaRepos
                 .orElseThrow { PrimaryAreaNotFoundException(primaryArea.name) }
                 .toDTO()
 
+    override fun getPrimaryAreaByName(primaryArea: String): PrimaryAreaDTO =
+        getPrimaryArea(PrimaryArea.valueOf(primaryArea))
+
     override fun getAllPrimaryAreas(): Set<PrimaryAreaDTO> =
         primaryAreaRepository
             .findAll()

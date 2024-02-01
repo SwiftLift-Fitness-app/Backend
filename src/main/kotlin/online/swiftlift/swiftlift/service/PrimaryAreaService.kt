@@ -9,6 +9,8 @@ interface PrimaryAreaService {
 
     fun getPrimaryArea(primaryArea: PrimaryArea): PrimaryAreaDTO
 
+    fun getPrimaryAreaByName(primaryArea: String): PrimaryAreaDTO
+
     fun getAllPrimaryAreas(): Set<PrimaryAreaDTO>
 
     fun isEmpty(): Boolean

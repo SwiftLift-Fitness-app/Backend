@@ -1,6 +1,8 @@
 package online.swiftlift.swiftlift.config
 
 import online.swiftlift.swiftlift.service.SwiftLiftUserDetailsService
+import online.swiftlift.swiftlift.util.authentication.CustomAuthenticationFailureHandler
+import online.swiftlift.swiftlift.util.authentication.CustomAuthenticationSuccessHandler
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest
 import org.springframework.context.annotation.Bean
@@ -29,6 +31,7 @@ class SecurityConfiguration(
             .requestMatchers("/").permitAll()
             .requestMatchers("/users/login", "/users/register", "/users/login-error").permitAll()
             .requestMatchers("/exercises/add", "/exercises/all", "/exercises/**").permitAll()
+            .requestMatchers("/workouts/add", "/workouts/all", "/workouts/**").permitAll()
             .requestMatchers("/meals/add", "/meals/all", "/meals/**").permitAll()
             .requestMatchers("/diets/add", "/diets/all", "/diets/**").permitAll()
             .requestMatchers("/users/all").permitAll()
@@ -38,8 +41,10 @@ class SecurityConfiguration(
             .loginPage("/users/login")
             .usernameParameter("username")
             .passwordParameter("password")
-            .defaultSuccessUrl("/")
-            .failureForwardUrl("/users/login-error")
+            .successHandler(customAuthenticationSuccessHandler())
+            .failureHandler(customAuthenticationFailureHandler())
+//            .defaultSuccessUrl("/")
+//            .failureForwardUrl("/users/login-error")
         }.logout {
             logout -> logout
             .logoutUrl("/users/logout")
@@ -56,10 +61,20 @@ class SecurityConfiguration(
     fun passwordEncoder(): PasswordEncoder =
         Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8()
 
-//    @Bean
-    fun configureGlobal(auth: AuthenticationManagerBuilder): Unit {
-        auth
-            .userDetailsService(swiftLiftUserDetailsService)
-            .passwordEncoder(passwordEncoder())
+    @Bean
+    fun customAuthenticationSuccessHandler(): CustomAuthenticationSuccessHandler {
+        return CustomAuthenticationSuccessHandler()
     }
+
+    @Bean
+    fun customAuthenticationFailureHandler(): CustomAuthenticationFailureHandler {
+        return CustomAuthenticationFailureHandler()
+    }
+
+//    @Bean
+//    fun configureGlobal(auth: AuthenticationManagerBuilder): Unit {
+//        auth
+//            .userDetailsService(swiftLiftUserDetailsService)
+//            .passwordEncoder(passwordEncoder())
+//    }
 }

@@ -25,11 +25,11 @@ class UserServiceImpl(val userRepository: UserRepository,
 
         userRepository.save(
             UserEntity(
-            username = userRegisterBindingModel.username,
-            password = encoder.encode(userRegisterBindingModel.password),
-            email = userRegisterBindingModel.email,
-            roles = mutableSetOf(role)
-        )
+                username = userRegisterBindingModel.username,
+                password = encoder.encode(userRegisterBindingModel.password),
+                email = userRegisterBindingModel.email,
+                roles = mutableSetOf(role)
+            )
         )
 
         return userRepository
@@ -40,15 +40,16 @@ class UserServiceImpl(val userRepository: UserRepository,
 
     override fun submitSurvey(userSurveyBindingModel: UserSurveyBindingModel): UserDTO {
 
-        val username = loggedUser().name
-        val user = userRepository.findByUsername(username).orElseThrow { UserNotFoundException(username) }
+//        val username = loggedUser().name
+        val user = userRepository.findByUsername(userSurveyBindingModel.username).orElseThrow { UserNotFoundException(userSurveyBindingModel.username) }
 
         user.age = userSurveyBindingModel.age
         user.weight = userSurveyBindingModel.weight
         user.height = userSurveyBindingModel.height
         user.gender = when(userSurveyBindingModel.gender) {
             'm' -> GenderType.MALE
-            else -> GenderType.FEMALE
+            'f' -> GenderType.FEMALE
+            else -> GenderType.OTHER
         }
 
         userRepository.save(user)

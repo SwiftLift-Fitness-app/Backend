@@ -7,18 +7,23 @@ import online.swiftlift.swiftlift.model.dto.meal.DietListDTO
 import online.swiftlift.swiftlift.model.dto.meal.IngredientDTO
 import online.swiftlift.swiftlift.model.dto.meal.MealDTO
 import online.swiftlift.swiftlift.model.entity.diet.DietEntity
+import online.swiftlift.swiftlift.model.enum.Day
+import online.swiftlift.swiftlift.repository.DayRepository
 import online.swiftlift.swiftlift.repository.DietRepository
 import online.swiftlift.swiftlift.repository.MealRepository
 import online.swiftlift.swiftlift.service.DietService
-import online.swiftlift.swiftlift.service.MealService
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
-class DietServiceImpl(private val dietRepository: DietRepository, private val mealRepository: MealRepository) : DietService {
+class DietServiceImpl(private val dietRepository: DietRepository,
+                      private val mealRepository: MealRepository,
+                      private val dayRepository: DayRepository) : DietService {
     override fun addDiet(diet: DietListDTO): DietDTO =
         dietRepository.save(
             DietEntity(
                 diet.name,
+                diet.days.map { dayRepository.findByName(Day.valueOf(it)) ?: throw Exception(it) }.toSet(),
                 diet.meals.map {
                     mealRepository.findByName(it)
                         ?: throw MealNotFoundException(it)
@@ -53,10 +58,19 @@ class DietServiceImpl(private val dietRepository: DietRepository, private val me
             ?.toListDTO()
             ?: throw DietNotFoundException(name)
 
+    override fun getDietsForToday(): List<DietDTO> =
+        dietRepository.findByDaysContainingIgnoreCase(
+            mutableSetOf((dayRepository.findByName(Day.valueOf("Day${LocalDate.now().dayOfMonth}")) ?: throw Exception("Day${LocalDate.now().dayOfMonth}")))
+        ).map { it.toDTO() }
+
     private fun DietEntity.toDTO() = DietDTO(name, meals.map {
         MealDTO(it.name, it.description, it.ingredients
-            .mapKeys { x -> IngredientDTO(x.key.name, x.key.measurement.name, x.key.dietaryRestrictions.map { y -> y.name }.toSet()) })
+            .mapKeys { x -> IngredientDTO(
+                x.key.name,
+                x.key.measurement.name,
+                x.key.calories,
+                x.key.dietaryRestrictions.map { y -> y.name }.toSet()) })
     })
 
-    private fun DietEntity.toListDTO() = DietListDTO(name, meals.map { it.name })
+    private fun DietEntity.toListDTO() = DietListDTO(name, days.map { it.name.name }.toSet(), meals.map { it.name })
 }

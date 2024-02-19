@@ -16,4 +16,6 @@ interface DietService {
     fun deleteDiet(name: String)
 
     fun getDietList(name: String): DietListDTO
+
+    fun getDietsForToday(): List<DietDTO>
 }

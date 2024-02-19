@@ -13,5 +13,4 @@ class ExerciseEntity(
     @Column(name = "description") val description: String = "",
     @Column(name = "area") @Enumerated(EnumType.STRING) val area: PrimaryArea = PrimaryArea.CORE,
     @Column(name = "equipment") @Enumerated(EnumType.STRING) val equipment: Equipment = Equipment.NONE,
-    @Column(name = "created") val created: LocalDateTime = LocalDateTime.now(),
 ) : BaseEntity()

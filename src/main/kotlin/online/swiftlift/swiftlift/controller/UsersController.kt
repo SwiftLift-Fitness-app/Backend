@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView
 
 @RestController
 @RequestMapping("/users")
-class UserController(val userService: UserService) {
+class UsersController(val userService: UserService) {
 
     @GetMapping("/all")
     fun getAll() = ResponseEntity.ok(userService.getAll())
@@ -30,7 +30,7 @@ class UserController(val userService: UserService) {
     fun register(@RequestBody userRegisterBindingModel: UserRegisterBindingModel): ResponseEntity<UserDTO> =
         ResponseEntity.ok(userService.register(userRegisterBindingModel))
 
-    @PatchMapping("/register")
+    @PatchMapping("/survey")
     fun register(@RequestBody userSurveyBindingModel: UserSurveyBindingModel): ResponseEntity<UserDTO> =
         ResponseEntity.ok(userService.submitSurvey(userSurveyBindingModel))
 

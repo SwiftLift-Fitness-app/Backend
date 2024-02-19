@@ -10,5 +10,6 @@ import online.swiftlift.swiftlift.model.enum.Measurement
 class IngredientEntity(
     @Column(name = "name") val name: String = "",
     @Column(name = "measurement") @Enumerated(EnumType.STRING) val measurement: Measurement = Measurement.OTHER,
+    @Column(name = "calories") val calories: Int = 0,
     @ManyToMany val dietaryRestrictions: Set<DietaryRestrictionEntity> = mutableSetOf()
 ) : BaseEntity()

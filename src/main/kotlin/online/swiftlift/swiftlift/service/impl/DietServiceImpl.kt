@@ -23,7 +23,7 @@ class DietServiceImpl(private val dietRepository: DietRepository,
         dietRepository.save(
             DietEntity(
                 diet.name,
-                diet.days.map { dayRepository.findByName(Day.valueOf(it)) ?: throw Exception(it) }.toSet(),
+//                diet.days.map { dayRepository.findByName(Day.valueOf(it)) ?: throw Exception(it) }.toSet(),
                 diet.meals.map {
                     mealRepository.findByName(it)
                         ?: throw MealNotFoundException(it)
@@ -58,10 +58,10 @@ class DietServiceImpl(private val dietRepository: DietRepository,
             ?.toListDTO()
             ?: throw DietNotFoundException(name)
 
-    override fun getDietsForToday(): List<DietDTO> =
-        dietRepository.findByDaysContainingIgnoreCase(
-            mutableSetOf((dayRepository.findByName(Day.valueOf("Day${LocalDate.now().dayOfMonth}")) ?: throw Exception("Day${LocalDate.now().dayOfMonth}")))
-        ).map { it.toDTO() }
+//    override fun getDietsForToday(): List<DietDTO> =
+//        dietRepository.findByDaysContainingIgnoreCase(
+//            mutableSetOf((dayRepository.findByName(Day.valueOf("Day${LocalDate.now().dayOfMonth}")) ?: throw Exception("Day${LocalDate.now().dayOfMonth}")))
+//        ).map { it.toDTO() }
 
     private fun DietEntity.toDTO() = DietDTO(name, meals.map {
         MealDTO(it.name, it.description, it.ingredients
@@ -72,5 +72,7 @@ class DietServiceImpl(private val dietRepository: DietRepository,
                 x.key.dietaryRestrictions.map { y -> y.name }.toSet()) })
     })
 
-    private fun DietEntity.toListDTO() = DietListDTO(name, days.map { it.name.name }.toSet(), meals.map { it.name })
+    private fun DietEntity.toListDTO() = DietListDTO(name,
+//        days.map { it.name.name }.toSet(),
+        meals.map { it.name })
 }

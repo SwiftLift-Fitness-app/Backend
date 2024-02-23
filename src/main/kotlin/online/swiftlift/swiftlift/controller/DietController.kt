@@ -23,6 +23,6 @@ class DietController(private val dietService: DietService) {
     @DeleteMapping("/{name}")
     fun deleteDiet(@PathVariable name: String) = dietService.deleteDiet(name)
 
-    @GetMapping("/diets/today")
-    fun getDietsForToday() = dietService.getDietsForToday()
+//    @GetMapping("/diets/today")
+//    fun getDietsForToday() = dietService.getDietsForToday()
 }

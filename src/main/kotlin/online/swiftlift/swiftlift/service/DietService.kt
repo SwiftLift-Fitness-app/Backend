@@ -17,5 +17,5 @@ interface DietService {
 
     fun getDietList(name: String): DietListDTO
 
-    fun getDietsForToday(): List<DietDTO>
+//    fun getDietsForToday(): List<DietDTO>
 }

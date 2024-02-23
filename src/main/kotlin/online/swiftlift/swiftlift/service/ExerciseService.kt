@@ -10,4 +10,6 @@ interface ExerciseService {
     fun findByName(name: String): ExerciseDTO
 
     fun getAll(): Set<ExerciseDTO>
+    fun deleteExercise(name: String): Boolean
+    fun changeExercise(exerciseAddBindingModel: ExerciseAddBindingModel): ExerciseDTO
 }

@@ -12,6 +12,6 @@ import online.swiftlift.swiftlift.model.entity.DayEntity
 @Table(name = "diets")
 class DietEntity(
     @Column(name = "name") val name: String = "",
-    @ManyToMany val days: Set<DayEntity> = setOf(),
+//    @ManyToMany val days: Set<DayEntity> = setOf(),
     @ManyToMany var meals: List<MealEntity> = listOf(),
 ) : BaseEntity()

@@ -68,6 +68,7 @@ class MealServiceImpl(
                 .mapKeys { x -> IngredientDTO(
                     name = x.key.name,
                     measurement = x.key.measurement.name,
+                    calories = x.key.calories,
                     dietaryRestrictions = x.key.dietaryRestrictions
                         .map { y -> y.name }
                         .toSet()) })

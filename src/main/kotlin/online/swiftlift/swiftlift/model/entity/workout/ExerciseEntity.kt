@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 @Table(name = "exercises")
 class ExerciseEntity(
     @Column(name = "name") val name: String = "",
-    @Column(name = "description") val description: String = "",
-    @Column(name = "area") @Enumerated(EnumType.STRING) val area: PrimaryArea = PrimaryArea.CORE,
-    @Column(name = "equipment") @Enumerated(EnumType.STRING) val equipment: Equipment = Equipment.NONE,
+    @Column(name = "description") var description: String = "",
+    @Column(name = "area") @Enumerated(EnumType.STRING) var area: PrimaryArea = PrimaryArea.CORE,
+    @Column(name = "equipment") @Enumerated(EnumType.STRING) var equipment: Equipment = Equipment.NONE,
 ) : BaseEntity()

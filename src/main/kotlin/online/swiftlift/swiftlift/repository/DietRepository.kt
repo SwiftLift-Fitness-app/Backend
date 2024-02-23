@@ -13,5 +13,5 @@ interface DietRepository : JpaRepository<DietEntity, UUID> {
 
     fun deleteByName(name: String)
 
-    fun findByDaysContainingIgnoreCase(days: MutableSet<DayEntity>): Set<DietEntity>
+//    fun findByDaysContainingIgnoreCase(days: MutableSet<DayEntity>): Set<DietEntity>
 }

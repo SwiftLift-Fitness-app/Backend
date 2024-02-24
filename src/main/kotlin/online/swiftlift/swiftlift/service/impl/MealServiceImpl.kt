@@ -47,7 +47,7 @@ class MealServiceImpl(
             ?.toDTO()
             ?: throw MealNotFoundException(name)
 
-    override fun changeMeal(mealAddBindingModel: MealAddBindingModel): Any {
+    override fun changeMeal(mealAddBindingModel: MealAddBindingModel): MealDTO {
         mealRepository.findByName(mealAddBindingModel.name)
             ?.let {
                 it.description = mealAddBindingModel.description

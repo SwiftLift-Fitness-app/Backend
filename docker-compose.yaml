@@ -1,0 +1,41 @@
+#services:
+#  mariadb:
+#    image: mariadb
+#    restart: always
+#    networks:
+#      - backend
+#    ports:
+#      - "3307:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 1234
+#      MYSQL_DATABASE: swiftlift
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD:
+#    volumes:
+#      - mariadb:/var/lib/mysql
+#  swiftlift-be:
+#    image: slazy/swiftlift-be
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - mariadb
+#    networks:
+#      - backend
+#    environment:
+#      SPRING_SECURITY_USER_NAME: $${SEC_USER:root}
+#      SPRING_SECURITY_USER_PASSWORD: $${SEC_PASS:}
+#      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.mariadb.jdbc.Driver
+#      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/swiftlift?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+#      SPRING_DATASOURCE_USERNAME: $${DB_USER:root}
+#      SPRING_DATASOURCE_PASSWORD: $${DB_PASS:1234}
+#      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+#      SPRING_SQL_INIT_MODE: never
+#      LOGGING_LEVEL_ORG_HIBERNATE_SQL: DEBUG
+#      LOGGING_LEVEL_ORG_HIBERNATE_ORM_JDBC_BIND: TRACE
+#
+#volumes:
+#  mariadb:
+#
+#networks:
+#  backend:

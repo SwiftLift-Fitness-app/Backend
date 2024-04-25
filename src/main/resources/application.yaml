@@ -2,14 +2,17 @@ spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/swiftlift?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-    username: ${MYSQL_USER:root}
-    password: ${MYSQL_PASS:}
+    username: ${DB_USER:root}
+    password: ${DB_PASS:}
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQLDialect
   security:
+    user:
+      name: ${SEC_USER:root}
+      password: ${SEC_PASS:}
     oauth2:
       client:
         registration:
